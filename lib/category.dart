@@ -3,11 +3,19 @@ import 'package:flutter/material.dart';
 import 'profile_page.dart';
 import 'cart.dart';
 
-class category extends StatelessWidget {
+class  category extends StatelessWidget {
   const category({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    List<Map<String, dynamic>> booksList = [
+      {"title": "The Da Vinci Code", "price": 19.99, "image": "assets/image/Frame (6).png"},
+      {"title": "Carrie Fisher", "price": 27.12, "image": "assets/image/Frame (7).png"},
+      {"title": "The Good Sister", "price": 27.12, "image": "assets/image/Frame (8).png"},
+      {"title": "The Waiting", "price": 27.12, "image": "assets/image/Frame (9).png"}
+    ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -38,30 +46,27 @@ class category extends StatelessWidget {
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 20,
               ),
-              itemCount: 6,
+              itemCount: booksList.length,
               itemBuilder: (context, index) {
-                return _buildBookItem();
-              },),),],),
+                return _buildBookItem(booksList[index]);
+              },
+            ),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           if (index == 0) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const home_page()),
-            );}
-          else if(index==3){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ProfileScreen()),);
-          }
-          else if(index==2){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>  cart()),);
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>  home_page()));
+          } else if (index == 3) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+          } else if (index == 2) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => cart()));
           }
         },
         selectedItemColor: Colors.deepPurple,
         unselectedItemColor: Colors.grey,
+        currentIndex: 1,
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
@@ -72,6 +77,7 @@ class category extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildCategoryTabs() {
     List<String> categories = ["All", "Novels", "Self Love", "Science", "Romantic"];
     return SizedBox(
@@ -102,29 +108,31 @@ class category extends StatelessWidget {
       ),
     );
   }
-  Widget _buildBookItem() {
+  Widget _buildBookItem(Map<String, dynamic> book) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Container(
-              color: Colors.grey[200],
-              child: const Center(child: Icon(Icons.book, size: 50, color: Colors.grey)),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: DecorationImage(
+                image: AssetImage(book["image"]),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
-          "The Da Vinci Code",
+        Text(
+          book["title"] ?? "No Title",
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
         ),
-        const Text(
-          "\$19.99",
-          style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+        Text(
+          "\$${book["price"]}",
+          style: const TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
         ),
       ],
     );

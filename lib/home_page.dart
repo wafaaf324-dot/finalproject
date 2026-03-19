@@ -25,11 +25,17 @@ class Book {
   });
 }
 void main(){
-  runApp(const MaterialApp(debugShowCheckedModeBanner: false,home: home_page(),));
+  runApp(const MaterialApp(debugShowCheckedModeBanner: false ,));
 }
 
 class home_page extends StatelessWidget {
-  const home_page({Key?key}):super(key:key);
+   home_page({Key?key}):super(key:key);
+  final List<String >vendor =[
+    "assets/image/Frame (12).png",
+    "assets/image/Group.png",
+    "assets/image/Frame (13).png",
+    "assets/image/Frame (14).png"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +44,7 @@ class home_page extends StatelessWidget {
         title: "The Kite Runner",
         author: "Khaled Hosseini",
         description: "A beautiful story of friendship and redemption in Afghanistan.",
-        imageUrl: "assets/image/pic2.jpeg",
+        imageUrl: "assets/image/Frame (1).png",
         price: 39.99,
         rating: 4.5,
       ),
@@ -46,7 +52,7 @@ class home_page extends StatelessWidget {
         title: "The Kite Runner",
         author: "Khaled Hosseini",
         description: "A beautiful story of friendship and redemption in Afghanistan.",
-        imageUrl: "assets/image/pic1.webp",
+        imageUrl: "assets/image/Frame (2).png",
         price: 14.99,
         rating: 4.0,
       ),
@@ -54,7 +60,7 @@ class home_page extends StatelessWidget {
         title: "The Kite Runner",
         author: "Khaled Hosseini",
         description: "A beautiful story of friendship and redemption in Afghanistan.",
-        imageUrl: "assets/image/pic3.jpeg",
+        imageUrl: "assets/image/Frame (3).png",
         price: 29.99,
         rating: 4.2,
       ),
@@ -102,10 +108,10 @@ class home_page extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
-          if (index == 0) {
+          if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const home_page()),
+              MaterialPageRoute(builder: (context) => const ProfileScreen()),
             );}
           else if(index==1){
             Navigator.push(
@@ -159,7 +165,7 @@ class home_page extends StatelessWidget {
               ],
             ),
           ),
-          const Icon(Icons.menu_book_rounded, size: 70, color: Colors.blueGrey),
+           Image.asset("assets/image/im1.png")
         ],
       ),
     );
@@ -191,9 +197,14 @@ class home_page extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(15),
+                     width: 140,
+                    margin: const EdgeInsets.only(right: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(15),
+                        child: Image.asset(book.imageUrl,fit: BoxFit.cover,width:double.infinity,),))
+                      ],
                     ),
                   ),
                 ),
@@ -215,14 +226,16 @@ class home_page extends StatelessWidget {
       height: 60,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 5,
+        itemCount:vendor.length,
         itemBuilder: (context, index) {
           return Container(
             width: 70,
-            margin: const EdgeInsets.only(right: 15),
+            margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade200),
               borderRadius: BorderRadius.circular(12),
+              image: DecorationImage(image: AssetImage(vendor[index]),
+                  fit:BoxFit.cover, )
             ),
             child: const Center(child: Icon(Icons.storefront, color: Colors.orange)),
           );
@@ -232,8 +245,13 @@ class home_page extends StatelessWidget {
   }
 
   Widget _buildAuthorsList() {
+    List <String> authorImage =[
+"assets/image/Frame (4).png",
+      "assets/image/Frame (5).png",
+      "assets/image/Image (1).png",
+    ];
     return SizedBox(
-      height: 120,
+      height: 100,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 4,
@@ -242,9 +260,10 @@ class home_page extends StatelessWidget {
             padding: const EdgeInsets.only(right: 20),
             child: Column(
               children: [
-                const CircleAvatar(
+                 CircleAvatar(
                   radius: 35,
                   backgroundColor: Colors.grey,
+                  backgroundImage: AssetImage(authorImage[index]),
                   child: Icon(Icons.person, color: Colors.white, size: 40),
                 ),
                 const SizedBox(height: 8),

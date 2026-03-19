@@ -29,8 +29,8 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 35,
-                  backgroundColor: Color(0xFFFDE8E8), // لون خلفية الصورة
-                  child: Icon(Icons.person, size: 40, color: Colors.orange),
+                  backgroundColor: Color(0xFFFDE8E8),
+                  backgroundImage: AssetImage("assets/image/Image (2).png"),
                 ),
                 const SizedBox(width: 15),
                 Expanded(
@@ -78,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
           if (index == 0) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const home_page()),
+              MaterialPageRoute(builder: (context) =>  home_page()),
             );}
           else if(index==1){
             Navigator.push(

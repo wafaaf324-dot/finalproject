@@ -9,7 +9,7 @@ import  'package:finalproject/profile_page.dart';
 import  'package:finalproject/category.dart';
 void main() {
   runApp(const MaterialApp(
-home: onbording(),
+home: splash_screen(),
   ));
 }
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return   onbording();
+    return   splash_screen();
 
 
   }}
